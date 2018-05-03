@@ -36,7 +36,7 @@ Is "crueltyfrailunderdogcyclingapostle" a "weaker" passphrase than a 6-word phra
 
 But **if an attacker knew your passphrase was 6 words, I'm not sure if a phrase with a compounding is "worse" (i.e. going to be cracked earlier) or as good as one without**.
 
-## The "Venn-diagram" problem (or, the "left-eye, right-eye" problem)
+## The "problematic overlap" condition (or, the "left-eye, right-eye" problem)
 
 What if we generated a passphrase and, at some point in it, got "paperboyhood"? As we've learned, if "paper", "boy", and "paperboy" are all words in our list, we have a compounding. Likewise if "boy", "hood", and "boyhood" are all on our list we have a second compounding. 
 
@@ -53,13 +53,13 @@ within the 2-phrase guess space we'll have "paperboyhood" appear twice: once as 
 
 Note: A Fediverse user brought this situation to my attention.
 
-I'm attempting to check for this conditional as well in this [more complex version of this tool](https://github.com/sts10/compound-passphrase-list-safety-checker).
+I'm attempting to check for this conditional as well in this [more complex version of this tool](https://github.com/sts10/compound-passphrase-list-safety-checker). Again, the tool about which you're reading right now does not attempt to weed out problematic overlaps.
 
 ## What this tool does
 
 This tool takes a word list (as a text file) as an input. It then searches the given list for words that can be combined to make other words on the list.
 
-Next, it attempts to find the smallest number of words that need to be removed in order to make the given word list "compound-safe". Finally, it prints out this new, shorter, compound-safe list to a new text file. In this way it makes word lists "compound-safe" (or at least more safe-- see "Known issue" and "Caveat" sections below).
+Next, it attempts to find the smallest number of words that need to be removed in order to eliminate the possibility of compoundings. Finally, it prints out this new, shorter, "safer" list to a new text file. In this way it makes word lists "compound-safe" (or at least more safe-- see "Known issue" and "Caveat" sections below).
 
 ## How to use this tool to check a word list
 
@@ -92,13 +92,15 @@ NOTE: 1Password's software, as far as I know, does NOT allow users to generate r
 
 The aim of the tool is to  is to remove the fewest number of these bad words to make the list compound-safe (see the `find_words_to_remove` function). When I ran it on the 1Password wordlist, I got 498 words back, which I dumped in to `scrap-lists-of-compound-words-and-components/words_to_remove_from_agile_list.txt`. 
 
-Then the `make_clean_list` function removes these 498 words, giving us the list found in `word_lists/agile_words.txt.compound-safe`, a list of 17,830 words compound-safe words.
+Then the `make_clean_list` function removes these 498 words, giving us the list found in `word_lists/agile_words.txt.compound-safe`, a list of 17,830 words safe from compoundings (as decribed above).
 
-Now, we should note that reducing the length of the list from 18,328 words to 17,830 has a cost. Given 1Password's current list of 18,328 words, when a user adds one of these words to their passphrase, they're adding about 14.162 bits of entropy to their passphrase. Using the shortened, compound-safe 17,830 word list, each randomly generated word would add about 14.122 bits to the passphrase. Of course, Agile Bits/1Password could replace the 498 words while keeping the list compound-safe.
+Now, we should note that reducing the length of the list from 18,328 words to 17,830 has a cost. Given 1Password's current list of 18,328 words, when a user adds one of these words to their passphrase, they're adding about 14.162 bits of entropy to their passphrase. Using the shortened, compound-safe 17,830 word list, each randomly generated word would add about 14.122 bits to the passphrase. Of course, Agile Bits/1Password could replace the 498 words while keeping the list free of compounding pairs.
+
+**Note: The Agile word list is not safe from problematic overlaps -- far from it. Even the 17,830-word list this script produces is not safe from problematic overlaps, so do NOT use it to generate passphrases without punctuation between words.**
 
 ## Known issues
 
-See: Venn diagram problem described above
+See: problematic overlap problem described above
 
 ## A caveat
 
