@@ -1,6 +1,8 @@
-# Compound Passphrase List Safety Checker
+# Compound Passphrase List Safety Checker (Simple Version)
 
 This command line tool checks whether a given passphrase word list (such as a diceware word list) has any words that can be combined to make another word on the list. It's written in Rust, which I am new to, so please use this with caution.
+
+**Note**: This is the more straight-forward version of this tool. A more complex one is located [here](https://github.com/sts10/compound-passphrase-list-safety-checker).
 
 Initially I wanted to make sure that no two words in [the EFF's long diceware word list](https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases) could be combined to make another word on the list. I later checked other lists.
 
@@ -50,6 +52,8 @@ hood
 within the 2-phrase guess space we'll have "paperboyhood" appear twice: once as [paperboy][hood] and again as [paper][boyhood]. Unfortunately the current version of this tool would NOT do anything to fix this list.
 
 Note: A Fediverse user brought this situation to my attention.
+
+I'm attempting to check for this conditional as well in this [more complex version of this tool](https://github.com/sts10/compound-passphrase-list-safety-checker).
 
 ## What this tool does
 
