@@ -2,7 +2,9 @@
 
 This command line tool checks whether a given passphrase word list (such as a diceware word list) has any words that can be combined to make another word on the list. It's written in Rust, which I am new to, so please use this with caution.
 
-**Note**: This is the more straight-forward version of this tool. A more complex one is located [here](https://github.com/sts10/compound-passphrase-list-safety-checker).
+## Newer versions
+
+There are two new versions of this program. The latest is called [csafe](https://github.com/sts10/csafe). There's also version between csafe and this program available [here](https://github.com/sts10/compound-passphrase-list-safety-checker).
 
 Initially I wanted to make sure that no two words in [the EFF's long diceware word list](https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases) could be combined to make another word on the list. I later checked other lists.
 
